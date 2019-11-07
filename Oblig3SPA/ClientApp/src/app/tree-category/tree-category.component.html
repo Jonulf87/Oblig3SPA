@@ -1,0 +1,33 @@
+<p>FAQ</p>
+
+<div class="col-md-5 list-group" *ngIf="categories; else elseBlock">
+  <a href="#" *ngFor="let category of categories" [ngClass]="{'active': category.id == selectedCategory}" class="list-group-item list-group-item-action" (click)="toggleActive(category.id)" data-toggle="collapse" data-target="{{category.id}}">
+    {{ category.name }}
+  </a>
+</div>
+<ng-template #elseBlock>Laster spørsmål....</ng-template>
+
+<app-tree-question *ngIf="selectedCategory" [categoryId]="selectedCategory"></app-tree-question>
+
+
+<div class="row">
+  <div class="accordion">
+    <div class="col-md-5 list-group">
+      <a href="#collapse1" class="list-group-item list-group-item-action" data-toggle="collapse">
+        Route
+      </a>
+      <p id="collapse1" class="collapse">Dette er en kollaps.</p>
+
+      <!--<app-tree-question *ngIf="selectedCategory" [categoryId]="selectedCategory" id="1" class="collapse"></app-tree-question>-->
+      <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#2">
+        Food
+      </a>
+      <app-tree-question *ngIf="selectedCategory" [categoryId]="selectedCategory" id="2" class="collapse"></app-tree-question>
+      <a href="#" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#3">
+        WiFi
+      </a>
+      <app-tree-question *ngIf="selectedCategory" [categoryId]="selectedCategory" id="3" class="collapse"></app-tree-question>
+    </div>
+  </div>
+</div>
+

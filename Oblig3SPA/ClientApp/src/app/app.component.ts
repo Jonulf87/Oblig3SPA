@@ -5,5 +5,21 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'app';
+    name = "";
+    toggleButton = true;
+
+
+    resetName() {
+        this.name = "";
+    }
+
+    toggleButtonReset() {
+        if (this.name === "") {
+            this.toggleButton = true;
+        }
+        else {
+            this.toggleButton = false;
+        }
+        return this.toggleButton;
+    }
 }
