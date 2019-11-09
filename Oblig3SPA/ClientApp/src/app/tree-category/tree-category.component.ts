@@ -13,16 +13,17 @@ export class TreeCategoryComponent {
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         http.get<Category[]>(baseUrl + 'api/questions/categories').subscribe(result => {
             this.categories = result;
-
-            if (this.categories.length > 0) {
-                this.selectedCategory = this.categories[0].id;
-            }
         }, error => console.error(error));
 
     }
 
     public toggleActive(categoryId: number): void {
-        this.selectedCategory = categoryId;
+        if (categoryId === this.selectedCategory) {
+            this.selectedCategory = null;
+        }
+        else {
+            this.selectedCategory = categoryId;
+        }
     }
 }
 

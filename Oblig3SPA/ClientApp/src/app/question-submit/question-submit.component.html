@@ -1,0 +1,13 @@
+<hr />
+
+<div *ngIf="!question; else elseBlock">
+    <p>Finner du ikke svaret på spørsmålet ditt? Send inn et spørsmål og få svar på det du lurer på :D</p>
+
+    <div class="form-group">
+        <textarea class="form-control" rows="12" cols="100"
+            placeholder="Her kan du skrive spørsmålet ditt..." [(ngModel)]="questionText"></textarea>
+        <button type="button" class="btn-primary btn mt-1" (click)="postQuestion()">Send!</button>
+    </div>
+</div>
+
+<ng-template #elseBlock>Takk for ditt spørsmål, det vil bli besvart asap zulu honolulu.</ng-template>

@@ -1,0 +1,11 @@
+fa-icon {
+    cursor: pointer;
+}
+
+#voteUp {
+    color: green;
+}
+
+#voteDown {
+    color: red;
+}

@@ -8,7 +8,6 @@ export class AppComponent {
     name = "";
     toggleButton = true;
 
-
     resetName() {
         this.name = "";
     }

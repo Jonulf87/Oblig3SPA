@@ -23,11 +23,11 @@ namespace Oblig3SPA.Controllers
         }
 
         // GET: api/Questions
-        [HttpGet("{categoryId}")]
-        public async Task<ActionResult<IEnumerable<QuestionVm>>> GetQuestions(int categoryId)
+        [HttpGet("{category}")]
+        public async Task<ActionResult<IEnumerable<QuestionVm>>> GetQuestions(Category category)
         {
             return await _context.Questions
-                .Where(a => (int)a.Category == categoryId)
+                .Where(a => a.Category == category)
                 .Select(a => new QuestionVm
                 {
                     Category = (int)a.Category,
@@ -40,6 +40,24 @@ namespace Oblig3SPA.Controllers
                     }).SingleOrDefault()
                 }).ToListAsync();
         }
+
+        // GET: api/Questions
+        [HttpGet("answer/{questionId}")]
+        public async Task<ActionResult<IEnumerable<AnswerVm>>> GetAnswer(int questionId)
+        {
+            return await _context.Answers
+                .Where(a => a.QuestionId == questionId)
+                .Select(a => new AnswerVm
+                {
+                    Id = a.Id,
+                    AnswerText = a.AnswerText,
+                    Rating = a.Rating
+                }).OrderByDescending(a => a.Rating)
+                .ToListAsync();
+        }
+
+
+
 
         [HttpGet("categories")]
         public ActionResult<IEnumerable<CategoryVm>> GetCategories()
@@ -55,47 +73,59 @@ namespace Oblig3SPA.Controllers
         }
 
         // PUT: api/Questions/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuestion(int id, Question question)
+        [HttpPut("voteup/{answerId}")]
+        public async Task<IActionResult> VoteUpAnswer(int answerId)
         {
-            if (id != question.Id)
+            var answer = await _context.Answers.FindAsync(answerId);
+
+            if (answer == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(question).State = EntityState.Modified;
+            answer.Rating++;
 
-            try
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("votedown/{answerId}")]
+        public async Task<IActionResult> VoteDownAnswer(int answerId)
+        {
+            var answer = await _context.Answers.FindAsync(answerId);
+
+            if (answer == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuestionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+            answer.Rating--;
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         // POST: api/Questions
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Question>> PostQuestion(Question question)
+        public async Task<ActionResult<Question>> PostQuestion(QuestionVm questionVm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var question = new Question
+            {
+                Category = Category.NotAnswered,
+                QuestionText = questionVm.QuestionText
+            };
+
             _context.Questions.Add(question);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
+            return Ok(question);
         }
 
         // DELETE: api/Questions/5
