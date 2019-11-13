@@ -21,19 +21,19 @@ namespace Oblig3SPA
             var questions = new Question[]
             {
                 new Question {
-                    QuestionText = "Hvilken mat har dere?", Category = Category.Food, Answers = new List<Answer>() {
+                    QuestionText = "Hvilken mat har dere?", Category = Category.Mat, Answers = new List<Answer>() {
                         new Answer { AnswerText = "Kebab", Rating = 4 }
                 }},
                 new Question {
-                    QuestionText = "Hvor mye koster maten?", Category = Category.Food, Answers = new List<Answer>() {
+                    QuestionText = "Hvor mye koster maten?", Category = Category.Mat, Answers = new List<Answer>() {
                         new Answer { AnswerText = "Masse", Rating = 45 }
                 }},
                 new Question {
-                    QuestionText = "Hvor går toget mitt?", Category = Category.Route, Answers = new List<Answer>() {
+                    QuestionText = "Hvor går toget mitt?", Category = Category.Reise, Answers = new List<Answer>() {
                         new Answer { AnswerText = "Hjemover", Rating = 98 }
                 }},
                 new Question {
-                    QuestionText = "Hvilket tog skal jeg ta?", Category = Category.Route, Answers = new List<Answer>() {
+                    QuestionText = "Hvilket tog skal jeg ta?", Category = Category.Reise, Answers = new List<Answer>() {
                         new Answer { AnswerText = "Det som skal hjem vel", Rating = 2 }
                 }},
                 new Question {

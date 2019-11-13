@@ -16,8 +16,10 @@ namespace Oblig3SPA.Models
     public enum Category
     {
         NotAnswered = 0,
-        Route = 1,
-        Food = 2,
-        Wifi = 3
+        
+        Reise = 1,
+        Mat = 2,
+        Wifi = 3,
+        Annet = 4
     }
 }

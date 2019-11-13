@@ -1,19 +1,25 @@
 <br />
-<div id="faq" class="col-md-12 px-0" *ngIf="categories; else elseBlock"><!--padding på 15 pixler-->
-  <div class="card" *ngFor="let category of categories">
-    <div class="card-header">
-      <h5 class="mb-0">
-        <button class="btn btn-link" (click)="toggleActive(category.id)">
-          {{ category.name }}
-        </button>
-      </h5>
-    </div>
+<div id="faq" class="col-md-12 px-0" *ngIf="categories; else elseBlock">
+    <!--padding på 15 pixler-->
+    <div class="card" *ngFor="let category of categories">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <button class="btn btn-primary btn-block btn-lg" (click)="toggleActive(category.id)">
+                    {{ category.name }}
+                </button>
+            </h5>
+        </div>
 
-    <div class="collapse" [ngClass]="{'show': category.id == selectedCategory }">
-      <div class="card-body px-2 py-2">
-        <app-tree-question *ngIf="category.id == selectedCategory" [categoryId]="category.id"></app-tree-question>
-      </div>
+        <div class="collapse" [ngClass]="{'show': category.id == selectedCategory }">
+            <div class="card-body px-2 py-2">
+                <span *ngIf="category.id == 4; else elseBlock">
+                    <app-question-submit></app-question-submit>
+                </span>
+                <ng-template #elseBlock>
+                    <app-tree-question *ngIf="category.id == selectedCategory" [categoryId]="category.id"></app-tree-question>
+                </ng-template>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <ng-template #elseBlock>Laster spørsmål....</ng-template>
