@@ -2,13 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TreeCategoryComponent } from './tree-category/tree-category.component';
 import { TreeQuestionComponent } from './tree-question/tree-question.component';
 import { TreeAnswerComponent } from './tree-answer/tree-answer.component';
@@ -20,9 +16,6 @@ import { QuestionSubmitComponent } from './question-submit/question-submit.compo
     declarations: [
         AppComponent,
         NavMenuComponent,
-        HomeComponent,
-        CounterComponent,
-        FetchDataComponent,
         TreeCategoryComponent,
         TreeQuestionComponent,
         TreeAnswerComponent,
@@ -32,12 +25,7 @@ import { QuestionSubmitComponent } from './question-submit/question-submit.compo
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FontAwesomeModule,
-        FormsModule,
-        RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-        ])
+        FormsModule        
     ],
     providers: [],
     bootstrap: [AppComponent]
